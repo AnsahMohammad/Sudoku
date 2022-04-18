@@ -7,4 +7,25 @@ Current Version :
  working on the demo sudoku grid.
  This program versions finishes the initial preliminaries by elimaning common elements from Row, Column and box wise.
  
+ It takes 0.016499996185302734 to finish the preliminaries.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 contributors : Ansah, Garvit, Bhavya
