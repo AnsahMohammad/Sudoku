@@ -56,16 +56,20 @@ def printer(arr):
     print(fin)
 
 arr1 = []
+#removing common elemnts from row and column
+
 def zeroAnalyzer(arr):
-    count  = 0
+    arrx = []
     for i in range(9):
         artemp = []
         for j in range(9):
             if(arr[i][j] == 0):
+                
                 k = []
                 for l in range(9):
-                    k.append(arr[l][j])
-                
+                    if arr[l][j] != 0:
+                        k.append(arr[l][j])
+                        
                 possible1 = [ f for f in range(1,10) if f not in k and f not in arr[i]]
                 temp = []
                 
@@ -130,13 +134,36 @@ def zeroAnalyzer(arr):
                 possible = [f for f in possible1 if f not in temp]
                 #print(possible,end = ' ')
                 if(len(possible) == 1):
-                    artemp.append((possible[0]))
+                    artemp.append(possible[0])
+                    print("printed "+str(possible[0]))
                 else:
                     artemp.append(possible)
             else:
                 #print(" {} ".format(arr[i][j]),end='')
                 artemp.append(arr[i][j])
-        arr1.append(artemp)
+        arrx.append(artemp)
+    return arrx
+
+#removing duplicates
+
+def layer3(arr):
+    for i in range(0,9,3):
+        for j in range(0,9,3):
+            #considering each 3x3 blocks
+            uniques_ = []
+            for k in range(i,i+3):
+                for l in range(j,j+3):
+                    if str(type(arr[k][l])) != "<class 'list'>":
+                        uniques_.append(arr[k][l])
+            uniques_ = list(set(uniques_))
+            for k in range(i,i+3):
+                for l in range(j,j+3):
+                    if str(type(arr[k][l])) == "<class 'list'>":
+                        t = [f for f in arr[k][l] if f not in uniques_]
+                        arr[k][l] = t
+                        if(len(arr[k][l]) == 1):
+                                arr[k][l] = arr[k][l][0]
+    return arr
 
 def ViewBlocks(arr):
     boxes = []
@@ -159,9 +186,9 @@ def ViewBlocks(arr):
     return boxes
 
 printer(arr)
-zeroAnalyzer(arr)
+arr1 = zeroAnalyzer(arr)
 printer(arr1)
-ViewBlocks(arr)
+arr1 = layer3(arr1)
 boxes = ViewBlocks(arr1)
 
 
@@ -257,6 +284,5 @@ printer(arr1)
 end = time()
 
 # --------------------------------------------------------------------------------------- #
-# cycle and an error in column wise unique cycle
 
 print("Total time taken : {}".format(end-start))
